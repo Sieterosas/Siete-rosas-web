@@ -4,7 +4,7 @@ import HeroCarousel from "../components/HeroCarousel.astro";
 import CategoryCards from "../components/CategoryCards.astro";
 import CTASection from "../components/CTASection.astro";
 
-// imágenes del carrusel (ajusta rutas según tu carpeta /public/hero/)
+// Carrusel (JPG en /public/hero/)
 const heroImages = [
   "/hero/hero1.jpg",
   "/hero/hero2.jpg",
@@ -12,17 +12,25 @@ const heroImages = [
   "/hero/hero4.jpg",
   "/hero/hero5.jpg",
 ];
+
+// Tarjetas de categorías (JPG en /public/categorias/)
+const categorias = [
+  { href: "/portfolio/bodas",      title: "Bodas",      src: "/categorias/bodas.jpg",      alt: "Reportajes de boda" },
+  { href: "/portfolio/comuniones", title: "Comuniones", src: "/categorias/comuniones.jpg", alt: "Reportajes de comunión" },
+  { href: "/portfolio/newborn",    title: "Newborn",    src: "/categorias/newborn.jpg",    alt: "Sesiones newborn" },
+  { href: "/portfolio/eventos",    title: "Eventos",    src: "/categorias/eventos.jpg",    alt: "Eventos / Social" },
+];
 ---
 
 <BaseLayout title="Sieterosas | Fotografía" description="Fotografía y cine emocional con estilo boho-nórdico">
-  
+
   <!-- Carrusel de portada -->
   <HeroCarousel images={heroImages} interval={5000} />
 
   <!-- Especialidades -->
   <section class="max-w-6xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-serif mb-8 text-gray-800">Especialidades</h2>
-    <CategoryCards />
+    <CategoryCards items={categorias} />
   </section>
 
   <!-- CTA -->
