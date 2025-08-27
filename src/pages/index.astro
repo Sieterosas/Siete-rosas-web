@@ -1,0 +1,30 @@
+
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.jsx";
+import Hero from "../components/Hero.astro";
+import Gallery from "../components/Gallery.astro";
+import FloatingWhatsApp from "../components/FloatingWhatsApp.jsx";
+import CookieBar from "../components/CookieBar.jsx";
+
+const images=[
+  { src:"/images/home/01.webp", alt:"Pareja en góndola" },
+  { src:"/images/home/02.webp", alt:"Detalle anillos" },
+  { src:"/images/home/03.webp", alt:"Baile" },
+  { src:"/images/home/04.webp", alt:"Comunión" },
+  { src:"/images/home/05.webp", alt:"Newborn" },
+  { src:"/images/home/06.webp", alt:"Sesión exterior" },
+];
+---
+<BaseLayout title="Siete Rosas – Fotografía de eventos" description="Fotografiamos historias de amor. Cuidamos la luz, el color y los detalles.">
+  <Header />
+  <Hero />
+  <section id="portfolio">
+    <Gallery images={images} />
+  </section>
+  <div class="text-center py-16">
+    <a href="/contacto" class="rounded-xl bg-stone-900 text-white px-6 py-3 inline-block">Consultar disponibilidad</a>
+  </div>
+  <FloatingWhatsApp />
+  <CookieBar />
+</BaseLayout>

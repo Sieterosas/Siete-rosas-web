@@ -1,0 +1,29 @@
+
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.jsx";
+---
+<BaseLayout title="Servicios – Siete Rosas" description="Bodas, Newborn, Sesiones y Comuniones.">
+  <Header />
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="font-serif text-4xl mb-8">Servicios</h1>
+    <div class="grid md:grid-cols-2 gap-8">
+      <section class="rounded-2xl border border-stone-200 bg-white p-6">
+        <h2 class="font-serif text-2xl mb-2">Vídeo de bodas</h2>
+        <p class="text-stone-600">Cine emocional y elegante. Narrativas íntimas, color suave y pieles naturales.</p>
+      </section>
+      <section class="rounded-2xl border border-stone-200 bg-white p-6">
+        <h2 class="font-serif text-2xl mb-2">Newborn</h2>
+        <p class="text-stone-600">Luz suave y seguridad ante todo. Tonos neutros y texturas naturales.</p>
+      </section>
+      <section class="rounded-2xl border border-stone-200 bg-white p-6">
+        <h2 class="font-serif text-2xl mb-2">Sesiones de pareja</h2>
+        <p class="text-stone-600">Preboda y postboda con dirección mínima para gestos auténticos.</p>
+      </section>
+      <section class="rounded-2xl border border-stone-200 bg-white p-6">
+        <h2 class="font-serif text-2xl mb-2">Comuniones</h2>
+        <p class="text-stone-600">Retratos atemporales en exterior o estudio, con estilismo elegante.</p>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
