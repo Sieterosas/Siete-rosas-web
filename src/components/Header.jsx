@@ -3,13 +3,21 @@ import React from "react";
 export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full bg-white shadow z-50">
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-24">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-28">
         
         {/* Logo + Marca */}
         <a href="/" className="flex items-center space-x-5">
-          <img src="/logo.png" alt="Logo Siete Rosas" className="h-20 w-20 rounded-full object-cover" />
-          <span className="text-2xl font-serif font-bold text-gray-900 tracking-wide">
-            Siete Rosas <span className="text-black">| Fotografía</span>
+          {/* Logo más grande */}
+          <img 
+            src="/logo.png" 
+            alt="Logo Siete Rosas" 
+            className="h-24 w-24 rounded-full object-cover" 
+          />
+          
+          {/* Nombre */}
+          <span className="text-3xl font-serif font-bold tracking-wide">
+            <span className="text-gray-500">Siete Rosas</span>{" "}
+            <span className="text-black">| Fotografía</span>
           </span>
         </a>
 
@@ -25,4 +33,5 @@ export default function Header() {
     </header>
   );
 }
+
 
