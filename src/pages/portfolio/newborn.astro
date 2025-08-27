@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Gallery from "../../components/Gallery.astro";
+
+const images = [
+  "/portfolio/newborn/01.jpg",
+  "/portfolio/newborn/02.jpg",
+  "/portfolio/newborn/03.jpg",
+];
+---
+<BaseLayout title="Newborn | Sieterosas" description="Sesiones newborn delicadas y seguras.">
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <h1 class="font-serif text-4xl mb-8">Newborn</h1>
+    <Gallery images={images} alt="Newborn" />
+  </section>
+</BaseLayout>
