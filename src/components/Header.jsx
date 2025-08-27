@@ -3,21 +3,23 @@ import React from "react";
 export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full bg-white shadow z-50">
-      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-20">
         
-        {/* Logo + Nombre */}
-        <a href="/" className="flex items-center space-x-2">
-          <img src="/logo.png" alt="Logo Siete Rosas" className="h-10 w-10 rounded-full" />
-          <span className="text-lg font-serif font-semibold text-gray-800">Siete Rosas</span>
+        {/* Logo + Marca */}
+        <a href="/" className="flex items-center space-x-4">
+          <img src="/logo.png" alt="Logo Siete Rosas" className="h-14 w-14 rounded-full object-cover" />
+          <span className="text-xl font-serif font-bold text-gray-900 tracking-wide">
+            Siete Rosas <span className="text-rose-600">| Fotografía</span>
+          </span>
         </a>
 
         {/* Menú */}
-        <nav className="space-x-6 text-sm font-medium text-gray-700">
-          <a href="/" className="hover:text-rose-500">Inicio</a>
-          <a href="/portfolio" className="hover:text-rose-500">Portfolio</a>
-          <a href="/servicios" className="hover:text-rose-500">Servicios</a>
-          <a href="/sobre" className="hover:text-rose-500">Sobre</a>
-          <a href="/contacto" className="hover:text-rose-500">Contacto</a>
+        <nav className="space-x-8 text-base font-medium text-gray-700">
+          <a href="/" className="hover:text-rose-600 transition">Inicio</a>
+          <a href="/portfolio" className="hover:text-rose-600 transition">Portfolio</a>
+          <a href="/servicios" className="hover:text-rose-600 transition">Servicios</a>
+          <a href="/sobre" className="hover:text-rose-600 transition">Sobre</a>
+          <a href="/contacto" className="hover:text-rose-600 transition">Contacto</a>
         </nav>
       </div>
     </header>
