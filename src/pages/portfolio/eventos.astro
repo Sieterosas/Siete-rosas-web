@@ -1,8 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Eventos from "../../components/Eventos.jsx";
+import Gallery from "../../components/Gallery.astro";
+
+// Ajusta estas rutas a tus fotos reales en /public/portfolio/eventos/
+const images = [
+  "/portfolio/eventos/01.jpg",
+  "/portfolio/eventos/02.jpg",
+  "/portfolio/eventos/03.jpg",
+];
 ---
 
-<BaseLayout title="Eventos | Sieterosas" description="Cobertura de eventos sociales y culturales con estilo documental.">
-  <Eventos />
+<BaseLayout title="Eventos | Sieterosas" description="Cobertura de eventos y social.">
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <h1 class="font-serif text-4xl mb-8">Eventos</h1>
+    <Gallery images={images} alt="Eventos" />
+  </section>
 </BaseLayout>
