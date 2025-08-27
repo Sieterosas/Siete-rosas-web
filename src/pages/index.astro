@@ -1,30 +1,51 @@
-
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.jsx";
 import Hero from "../components/Hero.astro";
-import Gallery from "../components/Gallery.astro";
-import FloatingWhatsApp from "../components/FloatingWhatsApp.jsx";
-import CookieBar from "../components/CookieBar.jsx";
+import CategoryCards from "../components/CategoryCards.astro";
+import AboutHome from "../components/AboutHome.astro";
+import PortfolioGrid from "../components/PortfolioGrid.astro";
+import Testimonials from "../components/Testimonials.astro";
+import CTASection from "../components/CTASection.astro";
+import Footer from "../components/Footer.astro";
 
-const images=[
-  { src:"/images/home/01.webp", alt:"Pareja en góndola" },
-  { src:"/images/home/02.webp", alt:"Detalle anillos" },
-  { src:"/images/home/03.webp", alt:"Baile" },
-  { src:"/images/home/04.webp", alt:"Comunión" },
-  { src:"/images/home/05.webp", alt:"Newborn" },
-  { src:"/images/home/06.webp", alt:"Sesión exterior" },
+const categorias = [
+  { href: "/portfolio/bodas",      title: "Bodas",      src: "/categorias/bodas.jpg",      alt: "Reportajes de boda" },
+  { href: "/portfolio/comuniones", title: "Comuniones", src: "/categorias/comuniones.jpg", alt: "Reportajes de comunión" },
+  { href: "/portfolio/newborn",    title: "Newborn",    src: "/categorias/newborn.jpg",    alt: "Sesiones newborn" },
+  { href: "/portfolio/eventos",    title: "Eventos",    src: "/categorias/eventos.jpg",    alt: "Eventos / Social" },
+];
+
+const destacados = [
+  "/destacados/01.jpg",
+  "/destacados/02.jpg",
+  "/destacados/03.jpg",
+  "/destacados/04.jpg",
+  "/destacados/05.jpg",
+  "/destacados/06.jpg",
 ];
 ---
-<BaseLayout title="Siete Rosas – Fotografía de eventos" description="Fotografiamos historias de amor. Cuidamos la luz, el color y los detalles.">
+
+<BaseLayout title="Sieterosas – Fotografía" description="Bodas, comuniones, newborn y eventos con un estilo elegante, boho–nórdico.">
   <Header />
+
+  <!-- Portada -->
   <Hero />
-  <section id="portfolio">
-    <Gallery images={images} />
-  </section>
-  <div class="text-center py-16">
-    <a href="/contacto" class="rounded-xl bg-stone-900 text-white px-6 py-3 inline-block">Consultar disponibilidad</a>
-  </div>
-  <FloatingWhatsApp />
-  <CookieBar />
+
+  <!-- Categorías -->
+  <CategoryCards items={categorias} />
+
+  <!-- Sobre mí -->
+  <AboutHome />
+
+  <!-- Portfolio destacado -->
+  <PortfolioGrid images={destacados} />
+
+  <!-- Testimonios -->
+  <Testimonials />
+
+  <!-- CTA -->
+  <CTASection />
+
+  <Footer />
 </BaseLayout>
