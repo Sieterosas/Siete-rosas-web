@@ -1,8 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Bodas from "../../components/Bodas.jsx";
+import Gallery from "../../components/Gallery.astro";
+
+// Ajusta las rutas a tus fotos reales dentro de /public/portfolio/bodas/
+const images = [
+  "/portfolio/bodas/01.jpg",
+  "/portfolio/bodas/02.jpg",
+  "/portfolio/bodas/03.jpg",
+];
 ---
 
-<BaseLayout title="Bodas | Sieterosas" description="Reportajes de boda con estilo elegante y natural.">
-  <Bodas />
+<BaseLayout title="Bodas | Sieterosas" description="Reportajes de boda elegantes y naturales.">
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <h1 class="font-serif text-4xl mb-8">Bodas</h1>
+    <Gallery images={images} alt="Bodas" />
+  </section>
 </BaseLayout>
