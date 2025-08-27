@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.jsx";
-import Hero from "../components/Hero.astro";
+import HeroCarousel from "../components/HeroCarousel.jsx";
 import CategoryCards from "../components/CategoryCards.astro";
 import AboutHome from "../components/AboutHome.astro";
 import PortfolioGrid from "../components/PortfolioGrid.astro";
@@ -10,10 +10,18 @@ import CTASection from "../components/CTASection.astro";
 import Footer from "../components/Footer.astro";
 
 const categorias = [
-  { href: "/portfolio/bodas",      title: "Bodas",      src: "/categorias/bodas.jpg",      alt: "Reportajes de boda" },
-  { href: "/portfolio/comuniones", title: "Comuniones", src: "/categorias/comuniones.jpg", alt: "Reportajes de comunión" },
-  { href: "/portfolio/newborn",    title: "Newborn",    src: "/categorias/newborn.jpg",    alt: "Sesiones newborn" },
-  { href: "/portfolio/eventos",    title: "Eventos",    src: "/categorias/eventos.jpg",    alt: "Eventos / Social" },
+  { href: "/portfolio/bodas",      title: "Bodas",      src: "/categorias/bodas.webp",      alt: "Reportajes de boda" },
+  { href: "/portfolio/comuniones", title: "Comuniones", src: "/categorias/comuniones.webp", alt: "Reportajes de comunión" },
+  { href: "/portfolio/newborn",    title: "Newborn",    src: "/categorias/newborn.webp",    alt: "Sesiones newborn" },
+  { href: "/portfolio/eventos",    title: "Eventos",    src: "/categorias/eventos.webp",    alt: "Eventos / Social" },
+];
+
+const heroImages = [
+  "/hero/01.webp",
+  "/hero/02.webp",
+  "/hero/03.webp",
+  "/hero/04.webp",
+  "/hero/05.webp",
 ];
 
 const destacados = [
@@ -29,23 +37,15 @@ const destacados = [
 <BaseLayout title="Sieterosas – Fotografía" description="Bodas, comuniones, newborn y eventos con un estilo elegante, boho–nórdico.">
   <Header />
 
-  <!-- Portada -->
-  <Hero />
+  <!-- Carrusel portada -->
+  <HeroCarousel images={heroImages} interval={5000} />
 
   <!-- Categorías -->
   <CategoryCards items={categorias} />
 
-  <!-- Sobre mí -->
   <AboutHome />
-
-  <!-- Portfolio destacado -->
   <PortfolioGrid images={destacados} />
-
-  <!-- Testimonios -->
   <Testimonials />
-
-  <!-- CTA -->
   <CTASection />
-
   <Footer />
 </BaseLayout>
