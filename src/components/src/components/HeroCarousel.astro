@@ -1,0 +1,60 @@
+---
+const { images = [], interval = 5000 } = Astro.props;
+---
+
+<section class="relative w-full h-[80vh] overflow-hidden" data-interval={interval}>
+  <!-- Slides -->
+  {images.map((src, idx) => (
+    <img
+      src={src}
+      alt={`Hero ${idx + 1}`}
+      loading={idx === 0 ? "eager" : "lazy"}
+      class={`hero-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+        idx === 0 ? "opacity-100" : "opacity-0"
+      }`}
+    />
+  ))}
+
+  <!-- Capa para legibilidad -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
+
+  <!-- Texto -->
+  <div class="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold drop-shadow">
+      FOTOGRAFÍA DE EVENTOS
+    </h1>
+    <p class="mt-5 max-w-2xl text-base sm:text-lg text-stone-100/95">
+      Fotografíamos <span class="font-semibold">historias de amor</span>. La historia la escribís vosotros; nosotros la contamos con imágenes.
+    </p>
+  </div>
+
+  <!-- Indicadores -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+    {images.map((_, idx) => (
+      <span class={`hero-dot h-2 w-2 rounded-full ${idx === 0 ? "bg-white" : "bg-white/50"}`}></span>
+    ))}
+  </div>
+
+  <!-- Lógica del carrusel (fade) -->
+  <script is:inline>
+    const root = document.currentScript.parentElement;
+    const interval = Number(root.dataset.interval) || 5000;
+    const slides = root.querySelectorAll('.hero-slide');
+    const dots = root.querySelectorAll('.hero-dot');
+
+    let i = 0;
+    function show(n) {
+      slides.forEach((s, idx) => s.classList.toggle('opacity-0', idx !== n));
+      slides[n].classList.remove('opacity-0');
+      dots.forEach((d, idx) => {
+        d.classList.toggle('bg-white', idx === n);
+        d.classList.toggle('bg-white/50', idx !== n);
+      });
+    }
+
+    setInterval(() => {
+      i = (i + 1) % slides.length;
+      show(i);
+    }, interval);
+  </script>
+</section>

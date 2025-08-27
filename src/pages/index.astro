@@ -1,51 +1,33 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.jsx";
-import HeroCarousel from "../components/HeroCarousel.jsx";
+import HeroCarousel from "../components/HeroCarousel.astro";
 import CategoryCards from "../components/CategoryCards.astro";
-import AboutHome from "../components/AboutHome.astro";
-import PortfolioGrid from "../components/PortfolioGrid.astro";
-import Testimonials from "../components/Testimonials.astro";
 import CTASection from "../components/CTASection.astro";
-import Footer from "../components/Footer.astro";
 
-const categorias = [
-  { href: "/portfolio/bodas",      title: "Bodas",      src: "/categorias/bodas.webp",      alt: "Reportajes de boda" },
-  { href: "/portfolio/comuniones", title: "Comuniones", src: "/categorias/comuniones.webp", alt: "Reportajes de comunión" },
-  { href: "/portfolio/newborn",    title: "Newborn",    src: "/categorias/newborn.webp",    alt: "Sesiones newborn" },
-  { href: "/portfolio/eventos",    title: "Eventos",    src: "/categorias/eventos.webp",    alt: "Eventos / Social" },
-];
-
+// imágenes del carrusel (ajusta rutas según tu carpeta /public/hero/)
 const heroImages = [
-  "/hero/01.webp",
-  "/hero/02.webp",
-  "/hero/03.webp",
-  "/hero/04.webp",
-  "/hero/05.webp",
-];
-
-const destacados = [
-  "/destacados/01.jpg",
-  "/destacados/02.jpg",
-  "/destacados/03.jpg",
-  "/destacados/04.jpg",
-  "/destacados/05.jpg",
-  "/destacados/06.jpg",
+  "/hero/hero1.jpg",
+  "/hero/hero2.jpg",
+  "/hero/hero3.jpg",
+  "/hero/hero4.jpg",
+  "/hero/hero5.jpg",
 ];
 ---
 
-<BaseLayout title="Sieterosas – Fotografía" description="Bodas, comuniones, newborn y eventos con un estilo elegante, boho–nórdico.">
-  <Header />
-
-  <!-- Carrusel portada -->
+<BaseLayout title="Sieterosas | Fotografía" description="Fotografía y cine emocional con estilo boho-nórdico">
+  
+  <!-- Carrusel de portada -->
   <HeroCarousel images={heroImages} interval={5000} />
 
-  <!-- Categorías -->
-  <CategoryCards items={categorias} />
+  <!-- Especialidades -->
+  <section class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-serif mb-8 text-gray-800">Especialidades</h2>
+    <CategoryCards />
+  </section>
 
-  <AboutHome />
-  <PortfolioGrid images={destacados} />
-  <Testimonials />
-  <CTASection />
-  <Footer />
+  <!-- CTA -->
+  <section class="bg-stone-100 py-16">
+    <CTASection />
+  </section>
+
 </BaseLayout>
