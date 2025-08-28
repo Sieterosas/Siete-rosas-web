@@ -1,85 +1,20 @@
+
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-// Puedes editar estos textos a tu gusto
-const nombre = "Juan Carlos";
-const estudio = "Sieterosas";
-const rol = "Fotografía y cine emocional";
-const descripcionCorta =
-  "Trabajo con luz natural y una dirección suave para crear imágenes honestas, elegantes y con alma. Me muevo entre lo documental y lo artístico para contar historias que perduren.";
-
-const valores = [
-  { title: "Estilo boho-nórdico", text: "Tonos suaves, luz natural y una estética limpia y atemporal." },
-  { title: "Cercanía y respeto", text: "Acompaño sin invadir, buscando naturalidad y emociones reales." },
-  { title: "Narrativa", text: "Cada reportaje cuenta una historia: desde los detalles hasta lo invisible." },
-];
+import Header from "../components/Header.jsx";
 ---
-
-<BaseLayout
-  title="Sobre mí | Sieterosas"
-  description="Conoce quién está detrás de Sieterosas: fotografía y cine emocional con estilo boho-nórdico."
->
-  <section class="max-w-6xl mx-auto px-6 py-16">
-    <div class="grid md:grid-cols-2 gap-10 items-center">
-      <!-- Texto -->
-      <div>
-        <h1 class="font-serif text-4xl mb-4 text-gray-900">Sobre mí</h1>
-        <p class="text-gray-600 mb-6">
-          Hola, soy <strong>{nombre}</strong>, la persona detrás de <strong>{estudio}</strong>.
-          {descripcionCorta}
-        </p>
-
-        <div class="grid gap-4">
-          {valores.map(({ title, text }) => (
-            <div class="p-5 bg-white rounded-2xl shadow">
-              <h3 class="text-lg font-semibold text-gray-800">{title}</h3>
-              <p class="text-gray-600 mt-1">{text}</p>
-            </div>
-          ))}
-        </div>
-
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/portfolio" class="inline-flex items-center px-5 py-2 rounded-xl bg-gray-900 text-white hover:bg-gray-800">
-            Ver portfolio
-          </a>
-          <a href="/contacto" class="inline-flex items-center px-5 py-2 rounded-xl border border-gray-300 hover:border-gray-400">
-            Consultar disponibilidad
-          </a>
-        </div>
-      </div>
-
-      <!-- Imagen (coloca el archivo en /public/about/portrait.jpg) -->
-      <figure class="w-full">
-        <img
-          src="/about/portrait.jpg"
-          alt={`Retrato de ${nombre} — ${rol}`}
-          loading="lazy"
-          class="w-full aspect-[4/5] object-cover rounded-2xl shadow"
-        />
-        <figcaption class="text-sm text-gray-400 mt-2">{rol}</figcaption>
-      </figure>
+<BaseLayout title="Sobre nosotros – Siete Rosas" description="Conoce el estudio Siete Rosas.">
+  <Header />
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid lg:grid-cols-2 gap-8 items-center">
+    <div>
+      <h1 class="font-serif text-4xl mb-4">Sobre nosotros</h1>
+      <p class="text-stone-600 max-w-prose">
+        Siete Rosas es un estudio creativo que combina la fotografía y el cine con un estilo boho y nórdico.
+        Nuestro objetivo es capturar la esencia de cada momento con elegancia, detalle y cercanía.
+      </p>
     </div>
-
-    <!-- Bloque de especialidades con enlaces -->
-    <div class="mt-16">
-      <h2 class="font-serif text-2xl mb-6 text-gray-900">Especialidades</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <a href="/portfolio/bodas" class="group p-6 bg-white rounded-2xl shadow hover:shadow-lg transition">
-          <div class="text-sm uppercase tracking-wide text-gray-400">Reportajes</div>
-          <div class="text-xl mt-1 text-gray-800 group-hover:underline">Bodas</div>
-          <p class="text-gray-600 mt-2">Narrativa emocional y elegante para el día de vuestra boda.</p>
-        </a>
-        <a href="/portfolio/comuniones" class="group p-6 bg-white rounded-2xl shadow hover:shadow-lg transition">
-          <div class="text-sm uppercase tracking-wide text-gray-400">Sesiones</div>
-          <div class="text-xl mt-1 text-gray-800 group-hover:underline">Comuniones</div>
-          <p class="text-gray-600 mt-2">Luz suave y naturalidad para recordar este momento único.</p>
-        </a>
-        <a href="/portfolio/newborn" class="group p-6 bg-white rounded-2xl shadow hover:shadow-lg transition">
-          <div class="text-sm uppercase tracking-wide text-gray-400">Newborn</div>
-          <div class="text-xl mt-1 text-gray-800 group-hover:underline">Recién nacido</div>
-          <p class="text-gray-600 mt-2">Fotografía delicada y segura en sus primeros días.</p>
-        </a>
-      </div>
+    <div class="rounded-2xl overflow-hidden shadow">
+      <img src="/images/home/01.webp" alt="Equipo Siete Rosas" class="w-full h-full object-cover" />
     </div>
   </section>
 </BaseLayout>

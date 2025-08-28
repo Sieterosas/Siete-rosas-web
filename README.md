@@ -18,4 +18,3 @@ Abre http://localhost:4321
 
 ## Despliegue
 - Sube a GitHub y despliega en Vercel (Settings → Domains para conectar el dominio)
-# Test deploy

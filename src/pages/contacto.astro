@@ -1,95 +1,45 @@
+
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-// EDITA ESTOS DATOS
-const phone = "+34 646 848 385";             // tu móvil
-const email = "hola@sieterosas.com";         // tu email
-const instagram = "https://instagram.com/sieterosasfilm";
-const facebook  = "https://facebook.com/sieterosasfilm";
-const whatsapp  = "https://wa.me/+34646848385"; // wa.me con tu móvil sin espacios
+import Header from "../components/Header.jsx";
 ---
-
-<BaseLayout
-  title="Contacto | Sieterosas"
-  description="Pide información y consulta disponibilidad para tu reportaje."
->
+<BaseLayout title="Contacto – Siete Rosas" description="Cuéntanos tu idea y consulta disponibilidad.">
+  <Header />
+  <section class="bg-stone-100 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="font-serif text-4xl mb-6">Contacto</h1>
+      <form class="grid gap-4 max-w-xl">
+        <input type="text" placeholder="Nombre" class="rounded-xl border border-stone-300 p-3" />
+        <input type="email" placeholder="Email" class="rounded-xl border border-stone-300 p-3" />
+        <textarea placeholder="Mensaje" rows="4" class="rounded-xl border border-stone-300 p-3"></textarea>
+        <button type="submit" class="rounded-xl bg-stone-900 text-white px-5 py-3">Enviar</button>
+      </form>
+      <p class="text-stone-600 text-sm mt-4">También puedes escribirnos por WhatsApp o Instagram.</p>
+    </div>
+  </section>
+</BaseLayout>
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const phone = "+34 600 000 000";
+const email = "hola@sieterosas.com";
+const whatsapp = "https://wa.me/34600000000";
+---
+<BaseLayout title="Contacto | Sieterosas" description="Consulta disponibilidad y pide información.">
   <section class="max-w-6xl mx-auto px-6 py-16">
     <h1 class="font-serif text-4xl mb-6 text-gray-800">Contacto</h1>
-    <p class="text-gray-600 mb-10 max-w-3xl">
-      Cuéntanos tu idea y fecha. Estaremos encantados de ayudarte a crear un reportaje
-      elegante y natural, con nuestro estilo boho-nórdico.
-    </p>
-
-    <!-- Datos directos -->
     <div class="grid md:grid-cols-3 gap-6 mb-12">
-      <a href={`tel:${phone}`} class="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition">
-        <div class="text-sm uppercase tracking-wide text-gray-400">Teléfono</div>
-        <div class="text-lg mt-1 text-gray-800">{phone}</div>
-      </a>
-
-      <a href={`mailto:${email}`} class="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition">
-        <div class="text-sm uppercase tracking-wide text-gray-400">Email</div>
-        <div class="text-lg mt-1 text-gray-800">{email}</div>
-      </a>
-
-      <a href={whatsapp} rel="noopener" target="_blank" class="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition">
-        <div class="text-sm uppercase tracking-wide text-gray-400">WhatsApp</div>
-        <div class="text-lg mt-1 text-gray-800">Escríbenos por WhatsApp</div>
-      </a>
+      <a href={`tel:${phone}`} class="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"><div class="text-sm text-gray-400">Teléfono</div><div class="text-lg mt-1">{phone}</div></a>
+      <a href={`mailto:${email}`} class="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"><div class="text-sm text-gray-400">Email</div><div class="text-lg mt-1">{email}</div></a>
+      <a href={whatsapp} target="_blank" class="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"><div class="text-sm text-gray-400">WhatsApp</div><div class="text-lg mt-1">Abrir chat</div></a>
     </div>
-
-    <!-- RRSS en escala de grises -->
-    <div class="flex items-center gap-6 mb-14">
-      <a href={instagram} target="_blank" rel="noopener"
-         class="grayscale hover:grayscale-0 transition">
-        <span class="sr-only">Instagram</span>
-        <!-- icono instagram (svg) -->
-        <svg class="w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM18 6.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-        </svg>
-      </a>
-
-      <a href={facebook} target="_blank" rel="noopener"
-         class="grayscale hover:grayscale-0 transition">
-        <span class="sr-only">Facebook</span>
-        <!-- icono facebook (svg) -->
-        <svg class="w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M13 3h4a1 1 0 0 1 1 1v4h-3a2 2 0 0 0-2 2v3h5l-1 4h-4v7h-4v-7H6v-4h3v-3a5 5 0 0 1 5-5z"/>
-        </svg>
-      </a>
-    </div>
-
-    <!-- Formulario simple (mailto como fallback) -->
-    <form action={`mailto:${email}`} method="post" encType="text/plain"
-          class="bg-white rounded-2xl shadow p-6 grid gap-4 max-w-2xl">
-      <div>
-        <label class="block text-sm text-gray-500 mb-1">Nombre</label>
-        <input class="w-full rounded-xl border border-gray-200 px-4 py-2 focus:outline-none focus:ring"
-               name="nombre" required />
-      </div>
+    <form action={`mailto:${email}`} method="post" encType="text/plain" class="bg-white rounded-2xl shadow p-6 grid gap-4 max-w-2xl">
+      <input class="w-full rounded-xl border border-gray-200 px-4 py-2" name="nombre" placeholder="Nombre" required />
       <div class="grid md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm text-gray-500 mb-1">Email</label>
-          <input type="email" class="w-full rounded-xl border border-gray-200 px-4 py-2 focus:outline-none focus:ring"
-                 name="email" required />
-        </div>
-        <div>
-          <label class="block text-sm text-gray-500 mb-1">Teléfono</label>
-          <input class="w-full rounded-xl border border-gray-200 px-4 py-2 focus:outline-none focus:ring"
-                 name="telefono" />
-        </div>
+        <input type="email" class="w-full rounded-xl border border-gray-200 px-4 py-2" name="email" placeholder="Email" required />
+        <input class="w-full rounded-xl border border-gray-200 px-4 py-2" name="telefono" placeholder="Teléfono" />
       </div>
-      <div>
-        <label class="block text-sm text-gray-500 mb-1">Mensaje</label>
-        <textarea class="w-full rounded-xl border border-gray-200 px-4 py-2 h-32 focus:outline-none focus:ring"
-                  name="mensaje" required></textarea>
-      </div>
-      <button class="inline-flex items-center justify-center px-5 py-2 rounded-xl bg-gray-900 text-white hover:bg-gray-800">
-        Enviar
-      </button>
-      <p class="text-xs text-gray-400">
-        Al enviar aceptas nuestra política de privacidad.
-      </p>
+      <textarea class="w-full rounded-xl border border-gray-200 px-4 py-2 h-32" name="mensaje" placeholder="Cuéntanos tu idea" required></textarea>
+      <button class="px-5 py-2 rounded-xl bg-gray-900 text-white hover:bg-gray-800">Enviar</button>
     </form>
   </section>
 </BaseLayout>
