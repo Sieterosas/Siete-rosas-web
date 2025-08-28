@@ -1,68 +1,81 @@
 ---
-interface Props {
-  images: string[];
-  interval?: number;
+import { Image } from '@astrojs/image/components';
+
+interface Img {
+  src: string;
+  alt?: string;
 }
-const { images = [], interval = 5000 } = Astro.props as Props;
-const carouselId = "hero-" + Math.random().toString(36).slice(2);
+
+interface Props {
+  images: Img[];       // [{ src: '/hero/hero1.jpg', alt: '...' }, ...]
+  interval?: number;   // milisegundos entre cambios (por defecto 5000)
+  height?: string;     // altura tailwind opcional, ej. "h-[70vh]"
+}
+
+const { images = [], interval = 5000, height = "h-[70vh]" } = Astro.props;
+
+// Evita fallos si no hay imágenes
+const safeImages = images.length > 0
+  ? images
+  : [{ src: "/hero/hero1.jpg", alt: "Hero" }];
 ---
 
-<section id={carouselId} class="relative w-full h-[80vh] overflow-hidden" data-interval={interval}>
-  {images.map((src, idx) => (
-    <img
-      src={src}
-      alt={`Hero ${idx + 1}`}
-      loading={idx === 0 ? "eager" : "lazy"}
-      class={`hero-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-        idx === 0 ? "opacity-100" : "opacity-0"
-      }`}
-    />
+<div class={`relative ${height} w-full overflow-hidden`} data-carousel>
+  {safeImages.map((img, i) => (
+    <div
+      class={`absolute inset-0 transition-opacity duration-700 ease-in-out ${i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+      data-slide
+    >
+      <Image
+        src={img.src}
+        alt={img.alt ?? ''}
+        width={1920}
+        height={1080}
+        format="webp"
+        class="w-full h-full object-cover select-none"
+        loading={i === 0 ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+      <!-- Degradado sutil para legibilidad de textos superpuestos (opcional) -->
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30"></div>
+    </div>
   ))}
 
-  <!-- Velo para lectura del texto -->
-  <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
-
-  <!-- Texto central -->
-  <div class="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold drop-shadow">
-      FOTOGRAFÍA DE EVENTOS
-    </h1>
-    <p class="mt-5 max-w-2xl text-base sm:text-lg text-stone-100/95">
-      Historias reales con luz natural y estilo elegante.
-    </p>
-  </div>
-
-  <!-- Puntos -->
-  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-    {images.map((_, idx) => (
-      <span class={`hero-dot h-2 w-2 rounded-full ${idx === 0 ? "bg-white" : "bg-white/50"}`}></span>
+  <!-- Indicadores (puntos) -->
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+    {safeImages.map((_, i) => (
+      <span class={`h-2 w-2 rounded-full bg-white/60 transition-all ${i === 0 ? 'w-5 bg-white' : ''}`} data-dot></span>
     ))}
   </div>
+</div>
 
-  <!-- JS inline con serialización correcta -->
-  <script is:inline>
-    const images = JSON.parse(`{JSON.stringify(images)}`);
-    const id = `{carouselId}`;
-    const interval = {interval};
+<script is:inline>
+  // Carrusel automático con fade
+  const root = document.currentScript.previousElementSibling;
+  const slides = root.querySelectorAll('[data-slide]');
+  const dots = root.querySelectorAll('[data-dot]');
+  if (slides.length > 0) {
+    let i = 0;
+    const show = (idx) => {
+      slides.forEach((s, j) => {
+        s.classList.toggle('opacity-100', j === idx);
+        s.classList.toggle('z-10', j === idx);
+        s.classList.toggle('opacity-0', j !== idx);
+        s.classList.toggle('z-0', j !== idx);
+      });
+      dots.forEach((d, j) => {
+        d.classList.toggle('w-5', j === idx);
+        d.classList.toggle('bg-white', j === idx);
+        d.classList.toggle('bg-white/60', j !== idx);
+        d.classList.toggle('w-2', j !== idx);
+      });
+    };
+    show(0);
 
-    const root = document.getElementById(id);
-    if (root && images.length > 1) {
-      const slides = Array.from(root.querySelectorAll('.hero-slide'));
-      const dots = Array.from(root.querySelectorAll('.hero-dot'));
-      let i = 0;
-
-      function show(n) {
-        slides.forEach((s, k) => s.classList.toggle('opacity-0', k !== n));
-        dots.forEach((d, k) => {
-          d.classList.toggle('bg-white', k === n);
-          d.classList.toggle('bg-white/50', k !== n);
-        });
-      }
-
-      setInterval(() => {
-        i = (i + 1) % slides.length;
-        show(i);
-      }, interval);
-    }
-  </script>
-</section>
+    const INTERVAL = Number({interval}) || 5000;
+    setInterval(() => {
+      i = (i + 1) % slides.length;
+      show(i);
+    }, INTERVAL);
+  }
+</script>

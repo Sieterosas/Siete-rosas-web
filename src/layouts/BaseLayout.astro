@@ -1,22 +1,76 @@
+---
+const { title = "Sieterosas | Fotografía", description = "" } = Astro.props;
+---
 
----
-const { title='Siete Rosas', description='Fotografía y cine emocional con estilo boho–nórdico.', ogImage='/og.jpg' } = Astro.props;
----
 <html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
     <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/global.css">
+    <title>{title}</title>
   </head>
-  <body class="bg-stone-50 text-stone-800 selection:bg-rose-200/50 selection:text-stone-900">
-    <slot />
+  <body class="bg-stone-50 text-stone-800 antialiased">
+    <!-- Header -->
+    <header class="sticky top-2 z-50 bg-white/90 backdrop-blur border-b border-stone-200">
+      <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+          <img src="/logo.png" alt="Sieterosas" class="h-12 w-12 rounded-full object-cover" />
+          <div class="flex items-baseline gap-2">
+            <span class="font-serif font-bold tracking-wide text-gray-600 text-2xl">Sieterosas</span>
+            <span class="font-serif text-gray-900">Fotografía</span>
+          </div>
+        </a>
+
+        <!-- Menú desktop -->
+        <ul class="hidden md:flex items-center gap-8 font-medium">
+          <li><a class="hover:text-rose-600" href="/">Inicio</a></li>
+          <li class="group relative">
+            <a class="hover:text-rose-600" href="/portfolio">Portfolio</a>
+            <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition absolute top-full left-0 bg-white shadow p-2 border border-stone-200">
+              <a class="block px-3 py-2 hover:bg-stone-50" href="/portfolio/bodas">Bodas</a>
+              <a class="block px-3 py-2 hover:bg-stone-50" href="/portfolio/comuniones">Comuniones</a>
+              <a class="block px-3 py-2 hover:bg-stone-50" href="/portfolio/newborn">Newborn</a>
+              <a class="block px-3 py-2 hover:bg-stone-50" href="/portfolio/eventos">Eventos</a>
+            </div>
+          </li>
+          <li><a class="hover:text-rose-600" href="/sobre">Sobre mí</a></li>
+          <li><a class="hover:text-rose-600" href="/servicios">Servicios</a></li>
+          <li><a class="hover:text-rose-600" href="/contacto">Contacto</a></li>
+        </ul>
+
+        <!-- Botón menú móvil -->
+        <button id="menubtn" class="md:hidden p-2 border rounded" aria-label="Abrir menú">
+          <div class="w-7 h-[2px] bg-stone-900 mb-1"></div>
+          <div class="w-7 h-[2px] bg-stone-900 mb-1"></div>
+          <div class="w-7 h-[2px] bg-stone-900"></div>
+        </button>
+      </nav>
+
+      <!-- Menú móvil -->
+      <div id="mobileMenu" class="hidden md:hidden border-t border-stone-200 bg-white">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4 text-stone-800">
+          <a href="/" class="hover:text-rose-600">Inicio</a>
+          <a href="/portfolio/bodas" class="hover:text-rose-600">Bodas</a>
+          <a href="/portfolio/comuniones" class="hover:text-rose-600">Comuniones</a>
+          <a href="/portfolio/newborn" class="hover:text-rose-600">Newborn</a>
+          <a href="/portfolio/eventos" class="hover:text-rose-600">Eventos</a>
+          <a href="/sobre" class="hover:text-rose-600">Sobre mí</a>
+          <a href="/servicios" class="hover:text-rose-600">Servicios</a>
+          <a href="/contacto" class="hover:text-rose-600">Contacto</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Aquí se inyecta el contenido de cada página -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+      <slot />
+    </main>
+
+    <!-- Script para menú móvil -->
+    <script>
+      document.getElementById('menubtn')?.addEventListener('click', () => {
+        document.getElementById('mobileMenu')?.classList.toggle('hidden');
+      });
+    </script>
   </body>
 </html>

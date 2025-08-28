@@ -1,5 +1,8 @@
-
+/* src/styles/global.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html, body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji','Segoe UI Emoji'; background:#faf7f2; color:#1f2937; }
+
+/* Opcional: pequeños ajustes visuales */
+html, body { height: 100%; }
+body { font-feature-settings: "liga" 1, "kern" 1; }
