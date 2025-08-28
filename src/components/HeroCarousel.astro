@@ -1,34 +1,68 @@
 ---
-// src/components/HeroCarousel.astro
-export interface Props {
-  images: string[];     // rutas tipo "/hero/hero1.jpg"
-  interval?: number;    // ms, por defecto 5000
+interface Props {
+  images: string[];
+  interval?: number;
 }
-const { images = [], interval = 5000 } = Astro.props;
-const id = "carousel-" + Math.random().toString(36).slice(2);
+const { images = [], interval = 5000 } = Astro.props as Props;
+const carouselId = "hero-" + Math.random().toString(36).slice(2);
 ---
 
-<div id={id} class="relative h-[80vh] w-full overflow-hidden">
-  {images.length > 0 ? (
-    <img id={`${id}-img`} src={images[0]} alt="Hero"
-         class="absolute inset-0 h-full w-full object-cover" loading="eager" />
-  ) : (
-    <div class="flex h-full items-center justify-center bg-gray-200">Sin imágenes</div>
-  )}
-  <div class="absolute inset-0 bg-black/40"></div>
-</div>
+<section id={carouselId} class="relative w-full h-[80vh] overflow-hidden" data-interval={interval}>
+  {images.map((src, idx) => (
+    <img
+      src={src}
+      alt={`Hero ${idx + 1}`}
+      loading={idx === 0 ? "eager" : "lazy"}
+      class={`hero-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+        idx === 0 ? "opacity-100" : "opacity-0"
+      }`}
+    />
+  ))}
 
-<script>
-  const images = JSON.parse({JSON.stringify(images)});
-  const id = {JSON.stringify(id)};
-  const interval = {interval};
+  <!-- Velo para lectura del texto -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
 
-  if (images.length > 1) {
-    let i = 0;
-    setInterval(() => {
-      i = (i + 1) % images.length;
-      const el = document.getElementById(id + "-img");
-      if (el) el.src = images[i];
-    }, interval);
-  }
-</script>
+  <!-- Texto central -->
+  <div class="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold drop-shadow">
+      FOTOGRAFÍA DE EVENTOS
+    </h1>
+    <p class="mt-5 max-w-2xl text-base sm:text-lg text-stone-100/95">
+      Historias reales con luz natural y estilo elegante.
+    </p>
+  </div>
+
+  <!-- Puntos -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+    {images.map((_, idx) => (
+      <span class={`hero-dot h-2 w-2 rounded-full ${idx === 0 ? "bg-white" : "bg-white/50"}`}></span>
+    ))}
+  </div>
+
+  <!-- JS inline con serialización correcta -->
+  <script is:inline>
+    const images = JSON.parse(`{JSON.stringify(images)}`);
+    const id = `{carouselId}`;
+    const interval = {interval};
+
+    const root = document.getElementById(id);
+    if (root && images.length > 1) {
+      const slides = Array.from(root.querySelectorAll('.hero-slide'));
+      const dots = Array.from(root.querySelectorAll('.hero-dot'));
+      let i = 0;
+
+      function show(n) {
+        slides.forEach((s, k) => s.classList.toggle('opacity-0', k !== n));
+        dots.forEach((d, k) => {
+          d.classList.toggle('bg-white', k === n);
+          d.classList.toggle('bg-white/50', k !== n);
+        });
+      }
+
+      setInterval(() => {
+        i = (i + 1) % slides.length;
+        show(i);
+      }, interval);
+    }
+  </script>
+</section>
